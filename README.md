@@ -1,2 +1,6 @@
 # tozetti13.github.io
-HTML5 Portf
+Dupla:
+Humberto Tozetti Carlos
+Joivan Junior
+
+Atividade 1 -> 
