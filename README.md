@@ -1,6 +1,4 @@
 # tozetti13.github.io
-Dupla:
-Humberto Tozetti Carlos
-Joivan Junior
+Dupla: Humberto Tozetti Carlos - Joivan Junior
 
-Atividade 1 -> 
+Atividade 1 -> https://tozetti13.github.io/index.html
