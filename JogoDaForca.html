@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo da Forca</title>
+
+<style type="text/css">
+
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+html,body{font-family:Verdana,sans-serif;font-size:15px;line-height:120%}html{overflow-x:hidden}
+
+#TOP {
+	position: fixed;
+	background-color: yellow;
+	width: 100%;
+	height: 5%;
+}
+
+#LEFT {
+	position: fixed;
+	background-color: yellow;
+	width: 7.5%;
+	height: 100%;
+}
+
+#RIGHT {
+	position: fixed;
+	background-color: yellow;
+	width: 7.5%;
+	height: 100%;
+	right: 0%;
+}
+
+#MEIO {
+	position: fixed;
+	background-color: yellow;
+	width: 100%;
+	height: 7%;
+	top: 55%;
+}
+
+#BOTTOM {
+	position: fixed;
+	background-color: yellow;
+	width: 100%;
+	height: 5%;
+	bottom: 0%;
+}
+
+#h01 {
+	display: none;
+	line-height: 0%;
+	letter-spacing: 2px;
+	text-shadow: 0px 4px 8px #888888;
+	text-align: center;
+	font-size: 130%;
+	color: #F00;
+	position: absolute;
+	left: 0%;
+	top: 50%;
+	-moz-transform:    rotate(-35deg);
+	-webkit-transform: rotate(-35deg);
+	-ms-transform:     rotate(-35deg);
+	-o-transform:      rotate(-35deg);
+}
+
+#AVISO {
+	position: absolute;
+	line-height: 0%;
+	letter-spacing: 0.5px;
+	top: 56%;
+	left: 7.5%;
+	font-size: 120%;
+}
+
+#EE {
+	display: none;
+	position: absolute;
+	top: 56%;
+	left: 25%;
+	font-size: 65%;
+}
+
+#rdp {
+	position: relative;
+	text-align: center;
+	bottom: 5%;
+	font-size: 80%;
+}
+
+#h02 {
+	display: block;
+	position: absolute;
+	letter-spacing: 0.2px;
+	text-shadow: 0px 4px 8px #000;
+	font-size: 80%;
+	right: 5px;
+	top: 5px;
+}
+
+#X01 {
+	display: block;
+	position: relative;
+	top: 15%;
+	line-height: 10%;
+	color: #000;
+	text-shadow: 0px 4px 8px #000;
+	text-align: center;
+	font-size: 130%;
+}
+
+#h99 {
+	display: block;
+	position: absolute;
+	line-height: 100%;
+	left: 0.5%;
+	bottom: -2.5%;
+	color: #000;
+	font-size: 120%;
+}
+
+#forca {
+	display: block;
+	background: #4e3a0b;
+	height: 160px;
+	position: relative;
+	width: 16px;
+	box-shadow: -3px -2px 0px 0px #888888;
+}
+
+#forca:after {
+	background: #4e3a0b;
+	content: "";
+	height: 15px;
+	left: 0px;
+	position: absolute;
+	top: -5px;
+	width: 110px;
+	box-shadow: -3px -3px 0px 0px #888888;
+}
+
+#forca:before {
+	background: #4e3a0b;
+	content: "";
+	height: 15px;
+	left: -2px;
+	position: absolute;
+	top: 15px;
+	width: 70px;
+	-ms-transform: rotate(-45deg); /* IE 9 */
+	-webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+	transform: rotate(-45deg);
+}
+
+#DIVCORPO {
+	display: block;
+	position: fixed;
+	width: 85%;
+	height: 50%;
+	right: 7.5%;
+	top: 5%;
+	padding: 15px 0px 0px 15px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#ROSTO {
+	display: none;
+	line-height: 24px;
+	letter-spacing: 0.25px;
+	font-size: 12px;
+	text-shadow: 0px 0px 1px #F00;
+	position: relative;
+	left: 0.5px;
+	top: -16px;
+}
+
+#CHAPEU {
+	display: none;
+	width: 19.2px;
+	height: 12.8px;
+	background-color: black;
+	position: absolute;
+	left: 73.4px;
+	top: 22px;
+	border-radius: 12.5px;
+}
+
+#ABA {
+	display: none;
+	width: 32px;
+	height: 3.2px;
+	background-color: black;
+	position: relative;
+	left: -3.5px;
+	top: 0px;
+	border-radius: 12px;
+}
+
+#CABECA {
+	display: none;
+	width: 25.6px;
+	height: 26.4px;
+	background-color: #FFCCCC;
+	position: absolute;
+	left: 70px;
+	top: 30px;
+	padding: 0px;
+	border-radius: 25px;
+}
+
+#PESCOCO {
+	display: none;
+	width: 11.2px;
+	height: 8px;
+	background-color: #FFCCCC;
+	position: absolute;
+	left: 7px;
+	top: 26px;
+	border-radius: 2px;
+}
+
+#BOCA { 
+	display: none;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: relative;
+	left: 7.8px;
+	top: -40px;
+	box-shadow: 0px 1px 0px 0px red;
+}
+
+#QUEIXO { 
+	display: none;
+	width: 0px;
+	height: 0px;
+	border-radius: 50%;
+	position: absolute;
+	left: 13px;
+	top: 25px;
+	box-shadow: 0px 0px 2px 1px red;
+}
+
+#TRONCO {
+	display: none;
+	width: 32px;
+	height: 48px;
+	background-color: blue;
+	position: absolute;
+	left: 66.5px;
+	top: 57px;
+	border-radius: 50% / 40% 40% 8% 8%;
+}
+
+#BRACOD1 {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: blue;    
+	position: absolute;
+	left: -10px;
+	top: -2px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+	transform: rotate(45deg);
+}
+
+#BRACOD2 {
+	display: none;
+	width: 10px;
+	height: 30px;
+	background-color: #FFCCCC;    
+	position: relative;
+	left: -8px;
+	top: 26px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+	transform: rotate(45deg);
+}
+
+#MAOD {
+	display: none;
+	width: 16px;
+	height: 16px;
+	background-color: black;    
+	position: absolute;
+	right: -2px;
+	bottom: -5px;    
+	border-radius: 12.5px;
+}
+
+#BRACOE1 {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: blue;    
+	position: absolute;
+	right: -10px;
+	top: -2px;    
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(135deg); /* IE 9 */
+	-webkit-transform: rotate(135deg); /* Chrome, Safari, Opera */
+	transform: rotate(135deg);
+}
+
+#BRACOE2 {
+	display: none;
+	width: 10px;
+	height: 30px;
+	background-color: #FFCCCC;    
+	position: relative;
+	right: -8px;
+	top: -4px;    
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(145deg); /* IE 9 */
+	-webkit-transform: rotate(145deg); /* Chrome, Safari, Opera */
+	transform: rotate(145deg);
+}
+
+#MAOE {
+	display: none;
+	width: 16px;
+	height: 16px;
+	background-color: black;    
+	position: absolute;
+	left: -4px;
+	top: -5px; 
+	border-radius: 12.5px;
+}
+
+#COXAD {
+	display: none;
+	width: 16px;
+	height: 30px;
+	background-color: blue;    
+	position: absolute;
+	right: 17.8px;
+	bottom: -20.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(12.5deg); /* IE 9 */
+	-webkit-transform: rotate(12.5deg); /* Chrome, Safari, Opera */
+	transform: rotate(12.5deg);
+}
+
+#PERNAD {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: #FFCCCC;    
+	position: absolute;
+	left: -1px;
+	bottom: -28.5px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(12.5deg); /* IE 9 */
+	-webkit-transform: rotate(12.5deg); /* Chrome, Safari, Opera */
+	transform: rotate(6.25deg);
+}
+
+#COXAE {
+	display: none;
+	width: 16px;
+	height: 30px;
+	background-color: blue;    
+	position: absolute;
+	left: 17.8px;
+	bottom: -20.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(-10deg); /* IE 9 */
+	-webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+	transform: rotate(-10deg);
+}
+
+#PERNAE {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: #FFCCCC;    
+	position: absolute;
+	right: -7px;
+	bottom: -26.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(-10deg); /* IE 9 */
+	-webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+	transform: rotate(-30deg);
+}
+
+#PEE {
+	display: none;
+	width: 20.8px;
+	height: 6.4px;
+	background-color: black;    
+	position: absolute;
+	right: 0px;
+	bottom: 1px;    
+	border-radius: 4px;
+}
+
+#PED {
+	display: none;
+	width: 20.8px;
+	height: 6.4px;
+	background-color: black;    
+	position: absolute;
+	right: 0px;
+	bottom: 1px;    
+	border-radius: 4px;
+}
+
+hr { 
+	border-style: inset;
+	border-width: 1px;
+	color: BLACK;
+	width: 90%;
+}
+
+#DIV00 {
+	display: block;
+	position: absolute;
+	width: 85%;
+	right: 7.5%;
+	top: 62%;
+	padding: 15px 0px 15px 0px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#DIV01 {
+	display: block;
+	position: fixed;
+	width: 85%;
+	right: 7.5%;
+	top: 62%;
+	padding: 15px 0px 15px 0px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#Ltr {
+	position:absolute;
+	left: 1.5%;
+	top: -10%;
+	line-height: 0px;
+	font-size: 80%;
+}
+
+input[type=text]{
+	font-size: 1em;
+	margin: 1px;
+	border:2.5px solid #DDD;
+	border-radius: 4px;
+	text-align: center;
+}
+
+input[type=radio]{
+	font-size: 10px;
+	width: 5%;
+}
+
+form.style1 label {
+	float:left;
+	margin-right:0.5em;
+	padding-top:0.2em;
+	text-align:right;
+	font-weight:bold;
+}
+
+.button {
+	display: none;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+	color: #FF0;
+	background-color: #00F;
+	border: none;
+	border-radius: 6px;
+	box-shadow: 0 4px #999;
+}
+
+.button:hover {
+	background-color: #0F0;
+}
+
+.button:active {
+	background-color: #000;
+	box-shadow: 0 2px #666;
+	transform: translateY(1.5px);
+}
+</head>
+</style>
+
+<body>
+	<div id="TOP"><h1 id="X01">JOGO DA FORCA</h1></div>
+	<div id="LEFT"></div>
+	<div id="RIGHT"></div>
+	<div id="MEIO"></div>
+	<div id="BOTTOM"></div>
+
+<div id="DIVCORPO">
+    <div id="forca">
+	<div id="CHAPEU"></div>
+	    <div id="CABECA">
+	    <div id="ABA"></div>
+	    <p id="ROSTO">(°ʖ°)</p>
+	    <div id="BOCA"></div>
+	    <div id="QUEIXO"></div>
+	    <div id="PESCOCO"></div>
+	    </div>
+
+	<div id="TRONCO">
+	<div id="BRACOD1"><div id="BRACOD2"><div id="MAOD"></div></div></div>
+	<div id="BRACOE1"><div id="BRACOE2"><div id="MAOE"></div></div></div>
+	<div id="COXAD"><div id="PERNAD"><div id="PED"></div></div></div>
+	<div id="COXAE"><div id="PERNAE"><div id="PEE"></div></div></div>
+	</div>
+	<h1 id="h01"></h1>
+    </div>
+	<h1 id="h02"></h1>
+	<p id="h99"></p>
+</div>
+
+    <div id="DIV01" align="left">
+	<p id="Ltr" style="display:none"><b>Letras: </b></p>
+
+<form id="FormPlv" action="" class="style1" style="display:none">
+	<label for="TxtPlv">Palavra:</label>
+	<input type="text" name="TxtPlv" id="TxtPlv" size="12" autofocus/>
+</form>
+
+	<form id="FormOpc" action="" style="display:block";>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Livre_Escolha">Livre Escolha<br>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Fruta">Frutas<br>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Time">Times<br>
+	</form>
+
+<form id="FormLTR" action="" class="style1" style="display:none">
+	<label for="TxtLtr">Letra:</label>
+	<input type="text" name="TxtLtr" id="TxtLtr" size="4"/>
+</form>
+
+	<p id="h00" style="display:none"></p>
+    </div>
+
+<script>
+var LETTERS="", WRD01=" ", WRD02=" ", WRD03=" ", WRDSA="", patt=" ", COUNT=0, ARWRD01=[], ARWRD02=[], ERR=0, ERROU=0, TPWRD="", STT=0, LINK="";
+var X = document.getElementById("DIVCORPO");
+var Y = X.getElementsByTagName("*");
+var snd="", ORGN="";
+var audio = document.getElementById("myAudio");
+
+function toca(ORGN) {
+	if (ORGN=="ERRO"){ audio.src = eval("SOUND"+"1"+"\(\)");}
+	else if (ORGN=="ACERTO") { audio.src = eval("SOUND"+"2"+"\(\)");}
+	audio.play();
+}
+
+function RELOAD() {
+	window.location.reload(true);
+}
+
+function PegaTP(tipowrd) {
+	document.getElementById('AVISO').style.display = "none";
+	/* Armazena a var TPWRD e "chama" a function correspondente */
+	TPWRD = tipowrd;
+	eval ("Pega"+TPWRD+"\(\)");
+}
+
+function PegaLivre_Escolha() {
+	document.getElementById('FormOpc').style.display = "none";
+	document.getElementById('FormPlv').style.display = "block";
+	document.getElementById('BTN02').style.display = "block";
+}
+
+function PegaPalavra() {
+	WRD01 = document.getElementById("FormPlv").elements.namedItem("TxtPlv").value.toUpperCase();
+	WRD01 = WRD01.replace(/[ ]/g,"-");
+	document.getElementById('BTN02').style.display = "none";
+	document.getElementById('FormPlv').style.display = "none";
+	PegaDicionário();
+}
+
+function PegaFruta() {
+	FRUTAS=["ABACATE", "ABACAXI", "ABIU", "ABRUNHO", "ABUTUA", "AÇAÍ", "ACEROLA", "ACHACHAIRU", "ACHUÁ", "AGUAÍ", "AJURU", "AKEE", "AMAPÁ", "AMEIXA", "AMÊNDOA", "AMORA", "ANTIDESMA", "APIRANGA", "ARAÇÁ", "ARICURI", "ARIRI", "ATEMOIA", "AVELÃ", "AVOCADO", "BABACO", "BABAÇU", "BACABA", "BACURI", "BACURIPARI", "BALATA", "BANANA", "BARU", "BILIMBI", "BIRIBÁ", "BURANHÉM", "BURITI", "BUTIÁ", "CABELUDINHA", "CACAU", "CAFEZINHO", "CAGAITA", "CAINITO", "CAJÁ", "CAJU", "CALABAÇA", "CALABURA", "CALAMONDIN", "CAMBUCÁ", "CAMBUCI", "CAMUTIM", "CANISTEL", "CAQUI", "CARAMBOLA", "CARAMURI", "CARISSA", "CEREJA", "CHAMPEDAKE", "CHERIMOIA", "CIRIGUELA", "COCO", "CONDESSA", "CRANBERRY"];
+	var tam = FRUTAS.length;	
+	var X = Math.floor(Math.random() * tam);
+	WRD01 = FRUTAS[X]; //PEGA FRUTA
+	PegaDicionário();
+}
+
+function PegaTime() {
+	TIMES=["ABC", "ASA", "AFOGADOS", "AIMORÉ", "AJAX", "ALBÂNIA", "ALECRIM", "ALEMANHA", "ALMIRANTE-BARROSO", "ALTO-ACRE", "ALTO-SANTO", "ALTOS", "AMADENSE", "AMAX", "AMERICA-RJ", "AMERICANO-MA", "AMERICANO-RJ", "AMÉRICA-TO", "AMÉRICA-DE-TRÊS-RIOS", "AMÉRICA-MG", "AMÉRICA-PE", "AMÉRICA-RN", "AMÉRICA-SE", "AMÉRICA-SP", "ANAPOLINA", "ANDIRÁ", "ANGRA-DOS-REIS", "ANÁPOLIS", "APARECIDENSE", "AQUIDAUANENSE", "ARACRUZ", "ARAGUAIA", "ARAGUAÍNA", "ARAIOSES", "ARAPONGAS", "ARARIPINA", "ARAXÁ", "ARAÇATUBA", "ARGENTINA", "ARGÉLIA", "ARIQUEMES", "ARRAIAL-DO-CABO", "ARSENAL", "ASSISENSE", "ASSU", "ASTON-VILLA", "ATALANTA", "ATHLETIC-BILBAO", "ATIBAIA", "ATLÂNTICO", "ATLÉTICO-ARAÇATUBA", "ATLÉTICO-IBIRAMA", "ATLÉTICO-MOGI", "ATLÉTICO-RORAIMA", "ATLÉTICO-SOROCABA", "ATLÉTICO-DE-MADRID", "ATLÉTICO-AC", "ATLÉTICO-BA", "ATLÉTICO-ES", "ATLÉTICO-GO", "ATLÉTICO-MG", "ATLÉTICO-PB", "ATLÉTICO-PE", "ATLÉTICO-PR", "AUDAX-RJ", "AUDAX-SP", "AUSTRÁLIA", "AUTO-ESPORTE-PB", "AVAÍ", "AVENIDA", "ÁFRICA-DO-SUL", "ÁGUA-SANTA", "ÁGUIA-NEGRA", "ÁGUIA-DE-MARABÁ", "ÁUSTRIA", "BACABAL", "BAHIA", "BAHIA-DE-FEIRA", "BALSAS", "BANDEIRANTE", "BANDEIRANTE-SP", "BANGU", "BARAÚNAS", "BARCELONA", "BARCELONA-RO", "BARRA-MANSA", "BARRAS", "BARUERI", "BARÉ", "BAYERN-DE-MUNIQUE", "BELO-JARDIM", "BENFICA", "BETIS", "BOA-ESPORTE", "BOAVISTA", "BOCA-JÚNIOR", "BOLOGNA", "BOLÍVIA", "BONSUCESSO", "BOQUINHENSE", "BORUSSIA-DORTMUND", "BOTAFOGO", "BOTAFOGO-BA", "BOTAFOGO-DF", "BOTAFOGO-PB", "BOTAFOGO-SE", "BOTAFOGO-SP", "BRAGANTINO", "BRASIL", "BRASIL-DE-PELOTAS", "BRASILIENSE", "BRASÍLIA", "BRAZLÂNDIA", "BRUSQUE", "BÉLGICA", "BÓSNIA", "CEO", "CRB", "CSA", "CSE", "CSP", "CABOFRIENSE", "CACERENSE", "CACHOEIRO", "CAGLIARI", "CAIÇARA", "CALDAS-NOVAS", "CALDENSE", "CAMARÕES", "CAMAÇARI", "CAMBORIÚ", "CAMETÁ", "CAMPINENSE", "CAMPOS", "CANINDÉ", "CANOAS", "CAPITAL", "CAPITAL-FC", "CAPIVARIANO", "CAPIXABA", "CARAJÁS", "CARUARU-CITY", "CASTANHAL", "CASTELO", "CATANDUVENSE", "CATANIA", "CATUENSE", "CAXIAS", "CEARÁ", "CEILANDENSE", "CEILÂNDIA", "CELTA", "CENE", "CENTRAL", "CERÂMICA", "CHAPECOENSE", "CHELSEA", "CHIEVO", "CHILE", "CHÃ-GRANDE", "CIANORTE", "COLATINA", "COLINAS", "COLO-COLO-BA", "COLÔMBIA", "COMERCIAL-AL", "COMERCIAL-MS", "COMERCIAL-PI", "COMERCIAL-SP", "CONFIANÇA", "CONILON", "CORDINO", "COREIA-DO-NORTE", "COREIA-DO-SUL", "CORI-SABBÁ", "CORINTHIANS", "CORINTIANS-RN", "CORITIBA", "CORITIBA-SE", "CORUMBAENSE", "CORURIPE", "COSTA-RICA", "COSTA-RICA-MS", "COSTA-DO-MARFIM", "CRAC", "CRATEÚS", "CRATO", "CRICIÚMA", "CROÁCIA", "CRUZEIRO", "CRUZEIRO-DF", "CRUZEIRO-PB", "CRUZEIRO-RS", "CUIABÁ", "DEMOCRATA-GV", "DEPORTIVO-LA-CORUÑA", "DESPORTIVA-FERROVIÁRIA", "DESPORTIVA-PARAENSE", "DESPORTIVO-BRASIL", "DINAMARCA", "DOM-BOSCO", "DORENSE", "DOZE", "DUQUE-DE-CAXIAS", "EC-RESENDE", "ECUS", "ELOSPORT", "EQUADOR", "ESLOVÁQUIA", "ESLOVÊNIA", "ESPANHA", "ESPANYOL", "ESPIGÃO", "ESPORTE-DE-PATOS", "ESPORTIVO", "ESPÍRITO-SANTO", "ESSE", "ESTADOS-UNIDOS", "ESTANCIANO", "ESTRELA-DO-NORTE", "EVERTON", "EXPRESSINHO", "FC-CASCAVEL", "FAST", "FEIRENSE", "FERNANDÓPOLIS", "FERROVIÁRIA", "FERROVIÁRIO", "FIGUEIRENSE", "FIORENTINA", "FLAMENGO", "FLAMENGO-DE-ARCOVERDE", "FLAMENGO-DE-GUANAMBI", "FLAMENGO-PB", "FLAMENGO-PI", "FLU-DE-FEIRA", "FLUMINENSE", "FORMOSA", "FORTALEZA", "FORÇA-E-LUZ", "FOZ-DO-IGUAÇU", "FRANCANA", "FRANÇA", "FREI-PAULISTANO", "FRIBURGUENSE", "FULHAM", "FUNORTE", "GAS", "GEL", "GALVEZ", "GALÍCIA", "GAMA", "GANA", "GAVIÃO", "GENOA", "GENUS", "GETAFE", "GLOBO-FC", "GLÓRIA", "GOIANÉSIA", "GOIÁS", "GOYTACAZ", "GRANADA", "GRÉCIA", "GRÊMIO", "GRÊMIO-ANÁPOLIS", "GRÊMIO-PRUDENTE", "GUAJARÁ", "GUARANI", "GUARANI-DE-JUAZEIRO", "GUARANI-DE-PALHOÇA", "GUARANI-MG", "GUARANY-DE-SOBRAL", "GUARANY-SE", "GUARATINGUETÁ", "GUARAÍ", "GUARUJÁ", "GURUPI", "HAITI", "HOLANDA", "HOLANDA-AM", "HONDURAS", "HORIZONTE", "HUMAITÁ", "HUNGRIA", "ICASA", "IMPERATRIZ", "IMPERIAL", "INDEPENDENTE-AP", "INDEPENDENTE-PA", "INDEPENDENTE-SP", "INGLATERRA", "INTER-DE-LAGES", "INTER-DE-LIMEIRA", "INTERNACIONAL", "INTERNACIONAL-PB", "INTERNAZIONALE", "INTERPORTO", "IPANEMA", "IPATINGA", "IPORÁ", "IRANDUBA", "IRATY", "IRLANDA", "IRLANDA-DO-NORTE", "IRÃ", "ISLÂNDIA", "ITABAIANA", "ITABUNA", "ITAPAJÉ", "ITAPIPOCA", "ITAPIRENSE", "ITAPORÃ", "ITARARÉ", "ITUANO", "ITUMBIARA", "ITÁLIA", "IVINHEMA", "JMALUCELLI", "JABAQUARA", "JACOBINA", "JACUIPENSE", "JAMAICA", "JAPÃO", "JI-PARANÁ", "JOINVILLE", "JOSÉ-BONIFÁCIO", "JUAZEIRENSE", "JUAZEIRO", "JUVENTUDE", "JUVENTUS", "JUVENTUS-AC", "JUVENTUS-SC", "JUVENTUS-SP", "LAGARTO", "LAJEADENSE", "LAZIO", "LEGIÃO", "LEVANTE", "LINENSE", "LINHARES", "LIVERPOOL", "LONDRINA", "LUCENA", "LUVERDENSE", "LUZIÂNIA", "MACAPÁ", "MACAÉ", "MADUREIRA", "MALLORCA", "MAMORÉ", "MANAUS", "MANCHESTER-CITY", "MANCHESTER-UNITED", "MANTHIQUEIRA", "MARACAJU", "MARACANÃ", "MARANGUAPE", "MARANHÃO", "MARCÍLIO-DIAS", "MARINGÁ", "MARÍLIA", "MATO-GROSSO", "MAZAGÃO", "METROPOLITANO", "MIGUELENSE", "MILAN", "MINAS-BOCA", "MIRAMAR", "MIRASSOL", "MISTO", "MIXTO", "MOGI-MIRIM", "MONTE-AZUL", "MONTES-CLAROS", "MORRINHOS", "MORUMBI", "MOTO-CLUB", "MOTO-CLUBE-RO", "MURICI", "MÁLAGA", "MÉXICO", "NACIONAL-BORBENSE", "NACIONAL-DE-MURIAÉ", "NACIONAL-DE-PATOS", "NACIONAL-AM", "NACIONAL-PR", "NAPOLI", "NAVIRAIENSE", "NEWCASTLE", "NIGÉRIA", "NOROESTE", "NORWICH-CITY", "NOVA-IGUAÇU", "NOVA-ZELÂNDIA", "NOVO", "NOVO-HAMBURGO", "NOVORIZONTINO", "NÁUAS", "NÁUTICO", "NÁUTICO-RR", "OESTE", "OLARIA", "OLÍMPIA-SP", "OLÍMPICO", "OPERÁRIO-FC", "OPERÁRIO-VG", "OPERÁRIO-AM", "OPERÁRIO-MS", "OPERÁRIO-PR", "ORATÓRIO", "OSASUNA", "OSVALDO-CRUZ", "PSTC", "PSV-EINDHOVEN", "PADUANO", "PALERMO", "PALMAS", "PALMEIRA-RN", "PALMEIRAS", "PANAMÁ", "PARACATU", "PARAGOMINAS", "PARAGUAI", "PARANAVAÍ", "PARANOÁ", "PARANÁ", "PARAUAPEBAS", "PARAÍBA", "PARAÍBA-DO-SUL", "PARAÍSO", "PARIS-SAINT-GERMAIN", "PARMA", "PARNAHYBA", "PASSO-FUNDO", "PATROCINENSE", "PAULISTA", "PAYSANDU", "PAÍS-DE-GALES", "PEDREIRA", "PELOTAS", "PENAPOLENSE", "PENAROL-AM", "PENEDENSE", "PERU", "PESCARA", "PESQUEIRA", "PETROLINA", "PIAUÍ", "PICOS", "PIMENTENSE", "PINHEIRENSE", "PLANALTINA", "PLÁCIDO-DE-CASTRO", "POCONÉ", "POLÔNIA", "PONTE-PRETA", "PORTO", "PORTO-PE", "PORTUGAL", "PORTUGUESA", "PORTUGUESA-SANTISTA", "PORTUGUESA-RJ", "POTIGUAR-DE-MOSSORÓ", "POTYGUAR-CN", "PRESIDENTE-PRUDENTE", "PRINCESA-DO-SOLIMÕES", "PRUDENTÓPOLIS", "PÉROLAS-NEGRAS", "QUEENS-PARK-RANGERS", "QUEIMADENSE", "QUISSAMÃ", "QUIXADÁ", "RB-BRASIL", "RAYO-VALLECANO", "READING", "REAL-CUBATENSE", "REAL-DESPORTIVO", "REAL-MADRID", "REAL-NOROESTE", "REAL-SOCIEDAD", "REAL-DF", "REAL-RR", "REMO", "REPÚBLICA-TCHECA", "RESENDE", "RICANATO", "RIO-BRANCO-VN", "RIO-BRANCO-AC", "RIO-BRANCO-ES", "RIO-BRANCO-PR", "RIO-BRANCO-RJ", "RIO-BRANCO-SP", "RIO-CLARO", "RIO-NEGRO-AM", "RIO-NEGRO-RR", "RIO-PRETO", "RIO-VERDE-GO", "RIOSTRENSE", "RIVER-PLATE-SE", "RIVER-PI", "ROLIM-DE-MOURA", "ROMA", "ROMA-PR", "ROMÊNIA", "RONDONIENSE", "RONDONÓPOLIS", "RUBRO", "RÚSSIA", "SABIÁ", "SALGUEIRO", "SAMPAIO-CORRÊA", "SAMPAIO-CORRÊA-RJ", "SAMPDORIA", "SANTA-CRUZ", "SANTA-CRUZ-DE-NATAL", "SANTA-CRUZ-PA", "SANTA-CRUZ-PB", "SANTA-CRUZ-RN", "SANTA-CRUZ-RS", "SANTA-MARIA", "SANTA-QUITÉRIA", "SANTA-RITA", "SANTACRUZENSE", "SANTANA", "SANTO-ANDRÉ", "SANTOS", "SANTOS-AP", "SERC", "SERGIPE", "SERRA", "SERRA-MACAENSE", "SERRA-TALHADA", "SERRANO-BA", "SERRANO-PB", "SERRANO-RJ", "SETE-DE-DOURADOS", "SETE-DE-JUNHO", "SETE-DE-SETEMBRO", "SETE-DE-SETEMBRO-AL", "SEVILLA", "SHAKHTAR-DONETSK", "SIENA", "SINOP", "SOBRADINHO", "SOCIAL", "SOCORRENSE", "SORRISO", "SOUSA", "SOUTHAMPTON", "SPARTA", "SPORT", "SPORT-ATALAIA", "SPORT-BELÉM", "SPORT-CAMPINA", "SPORT-ES", "STOKE-CITY", "SUL-AMÉRICA", "SUNDERLAND", "SUÉCIA", "SUÍÇA", "SWANSEA", "SÃO-BENEDITO", "SÃO-BENTO", "SÃO-BERNARDO", "SÃO-CAETANO", "SÃO-CARLOS", "SÃO-DOMINGOS", "SÃO-FRANCISCO-PA", "SÃO-JOSÉ-DOS-CAMPOS", "SÃO-JOSÉ-AP", "SÃO-JOSÉ-MA", "SÃO-JOSÉ-RS", "SÃO-JOSÉ-SP", "SÃO-JOÃO-DA-BARRA", "SÃO-LUIZ", "SÃO-MATEUS", "SÃO-PAULO", "SÃO-PAULO-AP", "SÃO-PAULO-RS", "SÃO-PEDRO", "SÃO-RAIMUNDO-AM", "SÃO-RAIMUNDO-PA", "SÃO-RAIMUNDO-RR", "SÃO-VICENTE", "SÉRVIA", "TAITI", "TANABI", "TAPAJÓS", "TARUMÃ", "TAUBATÉ", "TERESÓPOLIS", "TIGRES-RJ", "TIRADENTES-CE", "TIRADENTES-PA", "TOCANTINS", "TOCANTINS-DE-PALMAS", "TOCANTINÓPOLIS", "TOLEDO", "TOMBENSE", "TORINO", "TOTTENHAM", "TRAIRIENSE", "TREM", "TREZE", "TRICORDIANO", "TRINDADE", "TUBARÃO", "TUNA-LUSO", "TUPI-MG", "TUPY-ES", "TUPÃ", "TURQUIA", "URT", "UBERABA", "UBERLÂNDIA", "UBIRATAN", "UCRÂNIA", "UDINESE", "UNICLINIC", "UNIÃO-ABC", "UNIÃO-BARBARENSE", "UNIÃO-CACOALENSE", "UNIÃO-FREDERIQUENSE", "UNIÃO-MOGI", "UNIÃO-RONDONÓPOLIS", "UNIÃO-SUZANO", "UNIÃO-AL", "URSO", "URUGUAI", "VALENCIA", "VALLADOLID", "VASCO", "VASCO-AC", "VELO-CLUBE", "VENEZUELA", "VERA-CRUZ", "VERANÓPOLIS", "VIANA", "VILA-AURORA", "VILA-NOVA", "VILA-NOVA-ES", "VILAVELHENSE", "VILHENA", "VILLA-NOVA-MG", "VITÓRIA", "VITÓRIA-DA-CONQUISTA", "VITÓRIA-ES", "VITÓRIA-PE", "VOCEM", "VOLTA-REDONDA", "VOTUPORANGUENSE", "VÊNUS", "WERDER-BREMEN", "WEST-BROMWICH", "WEST-HAM", "WIGAN", "XV-DE-JAÚ", "XV-DE-PIRACICABA", "YPIRANGA-AP", "YPIRANGA-PE", "YPIRANGA-RS", "ZARAGOZA", "ZENIT"];
+	var tam = TIMES.length;
+	var X = Math.floor(Math.random() * tam);
+	WRD01 = TIMES[X]; //PEGA TIME
+	PegaDicionário();
+}
+
+function PegaDicionário() {
+	/* DEFINE PALAVRA & VARS */
+ 	document.getElementById('FormOpc').style.display = "none";
+	document.getElementById('TxtLtr').style.display = "block";
+	document.getElementById('Ltr').style.display = "block";
+	document.getElementById('BTN01').style.display = "block";
+	document.getElementById("BTN03").style.display = "block";
+	document.getElementById('FormLTR').style.display = "block"; //TESTES 
+
+		if (WRD01==" " || WRD01 == "") {
+		var LETTERS="ABCDEFGHIJLMNOPQRSTUVXZ"; //DEFINE LETRA INICIAL
+		var tam = LETTERS.length;
+		var X = Math.floor(Math.random() * tam);
+		var res = LETTERS.charAt(X);
+		var Y = Math.floor(Math.random() * 119);
+		WRD01 = eval("WORD_"+res+"\("+Y+"\)"); //PEGA PALAVRA
+		}
+	WRD02 = WRD01.replace(/./g,"_"); // TRANSFORMA LETRAS em "_"
+	document.getElementById("h00").innerHTML = WRD02; //GUARDA WRD02
+	document.getElementById('h99').innerHTML = WRD01.replace(/./g,"_ ");
+}
+
+function TESTA_LETRA(ltr) {
+	var EE = document.getElementById('EE').style.display;
+	if (EE=='block') {document.getElementById('EE').style.display = 'none';}
+
+	if (ltr) { patt=ltr; }
+	else { patt = document.getElementById('TxtLtr').value.toUpperCase(); }
+	document.getElementById('FormLTR').reset();
+	var pattAt = patt.charCodeAt();
+	if(pattAt=="59"){ /* Easter Egg Detected */
+	document.getElementById('EE').innerHTML = "\""+WRD01+"\"";
+	document.getElementById('EE').style.display = 'block';
+	}
+	else {
+	COUNT+=1;
+	var x=0;
+	document.getElementById('h99').innerHTML = "";
+	var PATT = new RegExp(patt, "g");
+	var N = WRD01.length;
+	ARWRD01 = WRD01.split(""); //TRANFORMA EM ARRAY
+
+	WRD02 = document.getElementById("h00").innerHTML;
+	ARWRD02 = WRD02.split(""); //TRANFORMA EM ARRAY
+	WRD03 = document.getElementById("h00").innerHTML; //W2 ANTIGA!
+	document.getElementById("h00").innerHTML = "" ; // LIMPA h00
+
+	//BUSCA A LETRA NA PALAVRA
+	for (;x<N;x++) {
+		if (ARWRD02[x] == "_" && ARWRD01[x] == patt) {ARWRD02[x]=patt;}
+		document.getElementById('h99').innerHTML += ARWRD02[x]+" "; // MOSTRA OS ACERTOS
+		document.getElementById("h00").innerHTML += ARWRD02[x];
+		}
+	document.getElementById('Ltr').innerHTML += patt+" "; //MOSTRA LETRA
+	WRD02 = document.getElementById("h00").innerHTML; //W2 NOVA!!!
+
+	/* A CADA ERRO, MOSTRA 03 PARTES DO CORPO */
+	if (WRD02 == WRD03) { ERROU+=1;toca("ERRO");
+		for (var z=0;z<=2;z++) {
+		Y[ERR].style.display = "block";
+			if (ERR>=20) { STT=1; var CUMPMT="ENFORCADO!"; }
+		ERR+=1;
+		}
+	}
+	/* FINALIZA & ESTATISTICAS: */
+	else if (WRD01 == WRD02) { STT=1; var CUMPMT="PARABÉNS!"; toca("ACERTO");}
+	document.getElementById("h02").innerHTML = "Resta(m) "+(7-ERROU)+"<br>"+COUNT+"º JOGADA<br>"+ERROU+"º ERRO";
+
+	if(STT==1) {
+	document.getElementById("h01").style.display = "block";
+	document.getElementById("h01").innerHTML = CUMPMT;
+	document.getElementById("BTN00").style.display = "block";
+	document.getElementById("BTN04").textContent = "Ver "+TPWRD;
+	document.getElementById('DIV01').style.display = "none";
+	document.getElementById("BTN03").style.display = "none";
+	document.getElementById('BTN01').style.display = "none";
+	document.getElementById('h99').innerHTML = WRD01;
+
+	WRDSA=WRD01;
+	var CAC="ÁÃÂÉÊÍÓÚÇ", SAC="AAAEEIOUC";
+	for (var n=0;n<CAC.length;n++) {
+	var ccac = CAC.charAt(n);
+	var csac = SAC.charAt(n);
+	WRDSA = WRDSA.replace(ccac, csac); }
+
+		if(TPWRD=="Fruta") {
+		LINK="https://www.google.com.br/search?q="+WRD01
+		document.getElementById("BTN04").style.display = "block";}
+
+		else if (TPWRD=="Time") {
+		var abc = "abcdefghijklmnopqrstuvwxyz";
+		var LTR = WRDSA.charAt(0).toLowerCase();
+		if(LTR!="a"){LTR = abc.charAt(abc.search(LTR)-1);}
+		LINK="http://globoesporte.globo.com/futebol/times/#"+LTR;
+		document.getElementById("BTN04").style.display = "block";}
+	}
+}
+}
+function ClearBTN() {
+	document.getElementById("BTN04").style.display = "none";
+}
+
+function DICA() {
+	var tam = WRD01.length;
+	for (var Y=0;Y<WRD01.length;Y++) {
+	var cc01 = WRD01.charCodeAt(Y);
+	var cc02 = WRD02.charCodeAt(Y);
+		if(cc02 == 95) { var ltr = WRD01.charAt(Y);
+		TESTA_LETRA(WRD01.charAt(Y));
+		break;
+		}
+	}
+	document.getElementById("BTN03").style.display = "none";
+}
+</script>
+	<button class="button" id="BTN00" style="position:absolute;left:7.5%;top:56.5%;" onclick="RELOAD()">Jogar</button>
+	<button class="button" id="BTN01" style="position:absolute;left:7.5%;top:56.5%;" onclick="TESTA_LETRA()">OK</button>
+	<button class="button" id="BTN02" style="position:absolute;left:7.5%;top:56.5%;" onclick="PegaPalavra()">OK</button>
+	<button class="button" id="BTN03" style="position:absolute;right:7.5%;top:56.5%;" onclick="DICA()">Dica</button>
+	<button class="button" id="BTN04" style="position:absolute;right:7.5%;top:56.5%;" onclick=window.open(LINK);ClearBTN();></button>
+	<p id="AVISO">Escolha o "Tipo de Palavra"</p>
+	<p id="EE">EASTER EGG</p>
+</body>
+</html>
