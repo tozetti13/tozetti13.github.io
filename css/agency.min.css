@@ -1,16 +1,16 @@
 body{
     overflow-x:hidden;
     font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
-	padding:100px 0;
-	background-image:url(../img/header-bg.jpg);
-    background-repeat:no-repeat;
+    padding:100px 0;
+    background-image:url(../img/header-bg.jpg);
+    background-repeat:repeat;
     background-attachment:fixed;
     background-position:center center;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover;
-	color: white;
+    color: white;
 }
 p{
     line-height:1.75;
