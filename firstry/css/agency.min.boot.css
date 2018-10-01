@@ -12,7 +12,13 @@ body{
     background-size:cover;
 	color: white;
 }
-
+.loc{
+    max-width: 3000px;
+    min-width: 100px;
+    padding: 5px;
+    margin-top: 0%;
+    text-align: center;
+}
 p{
     line-height:1.75;
 	
