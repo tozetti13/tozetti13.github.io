@@ -2,7 +2,9 @@ body{
     overflow-x:hidden;
     font-family:'Roboto Slab','Helvetica Neue',Helvetica,Arial,sans-serif;
 	padding:100px 0;
-	background-image:url(../img/header-bg.jpg);
+}
+.teste{
+    background-image:url(../img/header-bg.jpg);
     background-repeat:no-repeat;
     background-attachment:fixed;
     background-position:center center;
@@ -10,10 +12,9 @@ body{
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover;
-	color: white;
-    max-width:600px;
+    color: white;
+    max-width:100%;
     width: auto;
-    
 }
 p{
     line-height:1.75;
