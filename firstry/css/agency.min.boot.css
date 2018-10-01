@@ -12,6 +12,7 @@ body{
     background-size:cover;
 	color: white;
 }
+
 p{
     line-height:1.75;
 	
@@ -27,7 +28,7 @@ a:hover{
 }
 h1,h2,h3,h4,h5,h6{
     font-weight:700;
-	color: white;
+    color:white;
     font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif
 }
 section{
@@ -37,6 +38,7 @@ section h2.section-heading{
     font-size:40px;
     margin-top:0;
     margin-bottom:15px;
+    color: #1b1e21;
 }
 section h3.section-subheading{
     font-size:16px;
@@ -45,6 +47,11 @@ section h3.section-subheading{
     margin-bottom:75px;
     text-transform:none;
     font-family:'Droid Serif','Helvetica Neue',Helvetica,Arial,sans-serif
+}
+section h4.section-heading{
+    font-weight:700;
+    font-family:Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    color: #1b1e21;
 }
 @media (min-width:768px){
     section{
