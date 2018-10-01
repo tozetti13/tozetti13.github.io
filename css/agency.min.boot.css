@@ -11,10 +11,9 @@ body{
     -o-background-size:cover;
     background-size:cover;
 	color: white;
-	max-width:200px;
-    max-height:150px;
+    max-width:100%;
     width: auto;
-    height: auto;
+    
 }
 p{
     line-height:1.75;
