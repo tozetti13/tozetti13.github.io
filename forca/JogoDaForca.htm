@@ -3,8 +3,6 @@
   .teclado {
   	font-size: 11px;
   	font-family: Verdana, Arial, Helvetica, sans-serif;
-  	font-color:#000000;
-   	color:#000000;
   	font-weight:bold; 
   	text-decoration : none;
   }
@@ -17,17 +15,15 @@
   	text-decoration : none;
   }
 
-  .gameover {
+  .fimJogo {
   	font-size: 13px;
   	font-family: Verdana, Arial, Helvetica, sans-serif;
-  	font-color:#ffffff;
-   	color:#ffffff;
   	font-weight:bold;
   	text-decoration : none;
   }   
 </style>
 <html>
-  <body onload="sorteio();" bgcolor="#000000">
+  <body onload="sorteio();">
     <center>
     <div id="jg"></div>
     <div id="tcdo">
@@ -35,46 +31,53 @@
         //  BIBLIOTECA DE PALAVRAS  
         var palavras   = new Array();
         palavras[0]  = "carteira";
-        palavras[1]  = "brasil";
-        palavras[2]  = "amorzinho";
-        palavras[3]  = "fresquinho";
-        palavras[4]  = "andrezinho";
-        palavras[5]  = "bobeira";
-        palavras[6]  = "marcos";
-        palavras[7]  = "selio";
-        palavras[8]  = "jogo";
-        palavras[9]  = "mapa";
-        palavras[10] = "babado";
-        palavras[11] = "ana";
-        palavras[12] = "critico";
-        palavras[13] = "windows";
-        palavras[14] = "linux";
-        palavras[15] = "macaco";
+        palavras[1]  = "Alfinete";
+        palavras[2]  = "Agulha";
+        palavras[3]  = "Anel";
+        palavras[4]  = "Anzol";
+        palavras[5]  = "Andador";
+        palavras[6]  = "Botas";
+        palavras[7]  = "Bexiga";
+        palavras[8]  = "Camiseta";
+        palavras[9]  = "Caneta";
+        palavras[10] = "Carimbo";
+        palavras[11] = "Dedal";
+        palavras[12] = "Espelho";
+        palavras[13] = "Espada";
+        palavras[14] = "Faca";
+        palavras[15] = "Folha";
         palavras[16] = "panela";
-        palavras[17] = "frederico";
-        palavras[18] = "fofura";
-        palavras[19] = "grafico";
-        palavras[20] = "mula";
-        palavras[21] = "cavalo";
-        palavras[22] = "escola";
+        palavras[17] = "Gargantilha";
+        palavras[18] = "Garrafa";
+        palavras[19] = "Holofote";
+        palavras[20] = "Isopor";
+        palavras[21] = "Jaqueta";
+        palavras[22] = "Lanterna";
+        palavras[23] = "Maquiagem";
+        palavras[24] = "Mochila";
+        palavras[25] = "Papel";
+        palavras[26] = "Novelo";
+        palavras[27] = "Porta-Retrato";
+        palavras[28] = "Roteador";
+        palavras[29] = "Sapato";
+        palavras[30] = "Teclado";
 
       	// Variaveis GLOBAIS
         var  k;
         var iconte = Math.floor(Math.random()*2);
         var dj  = document.getElementById('jg');
         var erro = 1;
-        var d = "<pre><font class=gameover>";
+        var boneco = "<pre><font class=fimJogo>";
         var iconte = Math.floor(Math.random()*7);
         var ki = new Array(palavras[iconte].length);
-        // adicinando adicionar o valor "__" 
-      	//no vetor que armazena a palavra sorteada;
+        // adicinando adicionar o caracter "__" no vetor que armazena a palavra sorteada;
       	var itempodejogo = 0;
           for(k=0;k<palavras[iconte].length;k++){
 
               ki[k]="__";
         }
 
-        var p = new Array();
+        var palavra = new Array();
         function tempodejogo(){
           setTimeout("tempodejogo()",1000);
           itempodejogo++;
@@ -86,18 +89,20 @@
         */	
         	
         function sorteio() {
-            var djc = "<table cellpadding=2  ";
-                djc = djc + "cellspacing=4 border=0 width=390 ";
-                djc = djc + " height=40 bgcolor=#000000 style='border: ";
-                djc = djc + " 1px solid #666666;'><tr>";
+            var tPalavra = "<h1>Jogo da Forca</h1>";
+            	tPalavra = tPalavra + "Dica: Objeto.";
+                tPalavra = tPalavra + "<table cellpadding=2  ";
+                tPalavra = tPalavra + "cellspacing=4 border=0 width=390 ";
+                tPalavra = tPalavra + " height=40 style='border: ";
+                tPalavra = tPalavra + " 1px solid #666666;'><tr>";
             for(k = 0; k < palavras[iconte].length; k++){
-           		p[k] = k;
-        		djc = djc + "<td style='border: 0px solid #000000;' ";
-                djc = djc + " bgcolor=#000000 align=center ";
-                djc = djc + " valign=middle class=visao> __ </td>";
+           		palavra[k] = k;
+        		tPalavra = tPalavra + "<td style='border: 0px solid #000000;' ";
+                tPalavra = tPalavra + " align=center ";
+                tPalavra = tPalavra + " valign=middle class=visao> __ </td>";
         	}
-                djc = djc + "</tr></table><br>";
-         	    dj.innerHTML = djc;
+                tPalavra = tPalavra + "</tr></table><br>";
+         	    dj.innerHTML = tPalavra;
         		tempodejogo();
         }
         /*
@@ -111,38 +116,37 @@
             case 0:
               break
             case 1:
-              d = d + "      O   \n"
+              boneco = boneco + "      O   \n"
               break
             case 2:
-              d = d + "    -"
+              boneco = boneco + "    -"
               break
             case 3:
-              d = d + " | "
+              boneco = boneco + " | "
               break
             case 4:
-              d = d + "-\n"
+              boneco = boneco + "-\n"
               break
             case 5:
-              d = d + "     /"
+              boneco = boneco + "     /"
               break
             case 6:
-              d = d + " \\ \n"
+              boneco = boneco + " \\ \n"
               break
             default:
               var tecladaosome = document.getElementById('tecladao');
                   tecladaosome.style.display = 'none';
-                  d = "<img src='gover.gif'><br><br>";
-                  d = d + "<font class=gameover><b>GAME OVER</b></font><br>";
-                  
-                  d = d + "<br>";
-                  d = d + "<a href=# onclick='window.location.reload( false );' ";
-                  d = d + "  tyle='border: ";
-                  d = d + " 1px solid #000000;' class=gameover>[ NOVO JOGO ]</a><br>";
-                  d = d + "<font class=gameover> Palavra: <blink>" + palavras[iconte].toUpperCase() +"</blink></font>";
+                  boneco = "<img src='perdeu.gif'><br><br>";
+                  boneco = boneco + "<font class=fimJogo><b>FIM DE JOGO</b></font><br>";                  
+                  boneco = boneco + "<br>";
+                  boneco = boneco + "<a href=# onclick='window.location.reload( false );' ";
+                  boneco = boneco + "  tyle='border: ";
+                  boneco = boneco + " 1px solid #000000;' class=fimJogo>[ NOVO JOGO ]</a><br>";
+                  boneco = boneco + "<font class=fimJogo> Palavra: <blink>" + palavras[iconte].toUpperCase() +"</blink></font>";
         	}
-          // passar resultados de erro;
-  	      // criar boneco para a forca;  
-          m.innerHTML = d;
+          // Contar os erros ;
+  	      // Para criar o boneco;  
+          m.innerHTML = boneco;
           erro++;		
         }
         /*
@@ -170,14 +174,16 @@
           }
           var ik;
           var t;
-          t = "<table cellpadding=2 cellspacing=4 ";
+          t = "<h1>Jogo da Forca</h1>";
+          t = t + "Dica: Objeto."
+          t = t + "<table cellpadding=2 cellspacing=4 ";
           t = t + " border=0 width=390 height=40 ";
-          t = t + " bgcolor=#000000 style='border: ";
+          t = t + " style='border: ";
           t = t + " 1px solid #666666;'><tr>";
   	  
           for(ik = 0; ik < palavras[iconte].length; ik++){
         	  t = t + "<td style='border: ";
-            t = t + "0px solid #000000;' bgcolor=#000000 ";
+            t = t + "0px solid #000000;'";
             t = t + " align=center valign=middle ";
             t = t + " class=visao>"+ ki[ik] +"</td>";
           }
@@ -190,30 +196,15 @@
       	  dj.innerHTML = t;
   	   
           if(coleta == palavras[iconte].toUpperCase()){
-            var winmsg = "<br><img src='gwin.gif'>";
-              winmsg = winmsg + "<br><br><font class=gameover>Palavra revelada: <b><blink>";
-              winmsg = winmsg + palavras[iconte].toUpperCase() + "</blink>";
-              winmsg = winmsg + "<br><br>PARABÉNS VOCÊ VENCEU!!!<br><br>";
-              winmsg = winmsg + "<a href=# onclick='window.location.reload( false );' ";
-              winmsg = winmsg + "class=gameover>[ NOVO JOGO ]</a>";
-                
-            var winG = document.getElementById('g');
-              winG.innerHTML =  winmsg;
-            var tsome = document.getElementById('tecladao');
-              tsome.style.display = 'none';				   
-  				  var stempo = window.open("", "forca", 'width=370,height=20');
-  				
-  				  if(itempodejogo < 30) {
-  					  stempo.document.write("<center><font style='font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;font-color:#ffffff;color:#ffffff;font-weight:bold; text-decoration : none;'><b>PARABENS seu tempo foi de ("+itempodejogo+")seg.<br><img src='gwin.gif'>"); 
-  					}else {
-  					  if(itempodejogo < 60){
-  						  stempo.document.write("<center><font style='font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;font-color:#ffffff;color:#ffffff;font-weight:bold; text-decoration : none;'><b>eh vc foi mais ou menos, mas mesmo assim PARABENS seu tempo foi de ("+itempodejogo+")seg.<br><img src='gwin.gif'>"); 
-  					  } else {
-  					    stempo.document.write("<center><font style='font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;font-color:#ffffff;color:#ffffff;font-weight:bold; text-decoration : none;'><b></b>Ateh ganhou, mas es MUITO FRACO.. seu tempo foi de ("+itempodejogo+")seg.<br><img src='gwin.gif'>"); 
-  						}
-  					}			   
-    				stempo.document.bgColor="black"
-    				stempo.document.close() 		  
+            var msgVenceu = "<br><img src='venceu.gif'>";
+              msgVenceu = msgVenceu + "<br><br><font class=fimJogo>Palavra revelada: <b><blink>";
+              msgVenceu = msgVenceu + palavras[iconte].toUpperCase() + "</blink>";
+              msgVenceu = msgVenceu + "<br><br>PARABÉNS VOCÊ VENCEU!!!<br><br>";
+              msgVenceu = msgVenceu + "<a href=# onclick='window.location.reload( false );' ";
+              msgVenceu = msgVenceu + "class=fimJogo>[ NOVO JOGO ]</a>"; 
+
+              var venceuG = document.getElementById('g');
+              venceuG.innerHTML = msgVenceu;
           }    
         }   
         /*
@@ -221,7 +212,7 @@
               TECLADO VIRTUAL  
         -------------------
         */
-      	document.write("<table id=tecladao cellpadding=3 cellspacing=6 border=1 width=390 height=90 bgcolor=#000000");
+      	document.write("<table id=tecladao cellpadding=3 cellspacing=6 border=1 width=390 height=90");
       	document.write(" style='border: 1px solid #666666;'><tr style='border: 1px #000000;'> <form name=f action=# onsubmit='return false;'>");
         var linha=0;
         for(i=65; i < 91; i++){
@@ -229,8 +220,8 @@
             linha=0;
             document.write("</tr><tr style='border: 1px #000000;'>");
           }
-          document.write("<td align=center valign=middle width=15  style='border: 1px solid #000000;' bgcolor=#000000 ");
-          document.write(" onmouseover=style.backgroundColor='#FF0000;' onmouseout=style.backgroundColor='#000000' > ");
+          document.write("<td align=center valign=middle width=15  style='border: 1px solid #000000;' ");
+          document.write(" onmouseover=style onmouseout=style > ");
           document.write("<input type=submit name='" + String.fromCharCode(i)+"'  onclick=\"jogar('" + String.fromCharCode(i));
           document.write("');document.f."+ String.fromCharCode(i)+".style.display ='none';\" class=teclado value=" + String.fromCharCode(i) + " ></td>");
           linha++;
