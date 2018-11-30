@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Ordenação</title>
+</head>
+<style>
+	@keyframes donut-spin {
+	  0% {
+	    transform: rotate(0deg);
+	  }
+	  100% {
+	    transform: rotate(360deg);
+	  }
+	}
+	.donut {
+	  display: inline-block;
+	  border: 4px solid rgba(0, 0, 0, 0.1);
+	  border-left-color: black;
+	  border-radius: 50%;
+	  width: 50px;
+	  height: 50px;
+	  animation: donut-spin 1.2s linear infinite;
+	}
+	.orden{
+		margin: 0 auto;
+		min-width: 250px;
+		width: 30%;
+		text-align:center;
+		border-radius: 5px;
+		padding:30px;
+	}
+</style>
+<body>
+<div class="orden">
+	<input type="number" id="inputNumber">
+	<button onclick="teste()">ORDENAR</button>
+	<h3>Ordenação BubbleSort</h3>
+	<p id="tempo" class="tmp"></p>
+</div>
+
+<script src="ordena.js"> </script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</body>
+</html>
