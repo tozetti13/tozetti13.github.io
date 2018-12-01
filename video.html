@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Video</title>
+    </head>
+    <body>
+        <div id="principal" align="center">
+            <h1 id="titulo">Video</h1>
+            <div id="vid1" style="display:none">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/JPjEX8MEOAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
+                
+            </div>            
+            <div id="vid2" >
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/aI3S34d2MII" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>      
+            <button type="button" onclick="Mudarestado(midarid())">Trocar Video</button>
+        </div>
+
+        
+        <script>
+           
+
+            function midarid(){
+                var display = document.getElementById('vid1').style.display;
+                
+                if(display == "none"){
+                    return 'vid1';
+                }else{
+                    return 'vid2';
+                }
+
+            }
+            function Mudarestado(el) {
+                var el1;
+                if (el == 'vid1'){
+                    el1 = 'vid2';
+                }else{
+                    el1 = 'vid1';
+                }
+
+                var display = document.getElementById(el).style.display;
+                if(display == "none"){
+                    document.getElementById(el).style.display = 'block';
+                    document.getElementById(el1).style.display = 'none';
+                }else{
+                    document.getElementById(el).style.display = 'none';
+                    document.getElementById(el1).style.display = 'block';
+                }
+            }
+
+        </script>    
+    </body>
+</html>
