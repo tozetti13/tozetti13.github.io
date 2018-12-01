@@ -1,0 +1,79 @@
+ <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>Editor de Texto</title>
+      <style>
+       
+        #bloco_dig {
+          width: 400px;
+          height: 150px;
+          display: block;
+        }
+         #nome {
+          width: 400px;
+          height: 20px;
+          display: block;
+        }
+        #btn-save {
+          width: 100px;
+          height: 50px;
+          margin-top: 5px;
+        }
+       
+      </style>
+
+    </head>
+   <body>
+      <h3>Storage</h3>
+      Nome: <input type="text" id="nome"><br>
+      Editor de Texto: <textarea id="bloco_dig"></textarea>
+      <button id="btn-save">Salvar</button>
+      
+      <div class="str_save">
+            <p id="log_nome"> </p> 
+            <p id="log_tempo"></p>     
+      </div>
+      
+      <script> 
+        
+        (function(){
+          try {
+            (window.localStorage.getItem) 
+          } catch(e){
+            return; 
+          }
+          var name = document.querySelector('#nome');
+          var area = document.querySelector('#bloco_dig');
+          if (!area.value) {
+            area.value = window.localStorage.getItem('value');
+          }
+          updateLog(false);
+          document.querySelector('#btn-save').addEventListener('click', function () {
+            window.localStorage.setItem('name', name.value);
+            window.localStorage.setItem('value', area.value);
+            window.localStorage.setItem('timestamp', (new Date()).getTime());
+            updateLog(true);
+          }, false);
+          function updateLog(new_save) {
+            var log = document.querySelector("#log_tempo");
+            var nome = document.querySelector("#log_nome");
+            var tmp = 0;
+            if (window.localStorage.getItem('value')) {
+              tmp = ((new Date()).getTime() - (new Date()).setTime(window.localStorage.getItem('timestamp'))) / 1000;
+              if (new_save) {
+                log.textContent = 'Salvou.';
+                setTimeout(function() {
+                  log.textContent = '';
+                }, 3000);
+              } else {
+                nome.textContent = 'Nome da última edição: ' + window.localStorage.getItem('name');
+                log.textContent = 'Entrou pela última vez a: ' + tmp + 's atrás';
+              }
+            }
+          }
+        })();  
+      </script>
+    
+    
+  </body>
+  </html>
